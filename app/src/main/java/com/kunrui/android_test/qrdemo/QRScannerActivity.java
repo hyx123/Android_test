@@ -98,6 +98,7 @@ public class QRScannerActivity extends AppCompatActivity implements SurfaceHolde
             }
         }
 
+        //本地图片打开activityResult回调
         picture.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
