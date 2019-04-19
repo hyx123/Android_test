@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <Button
+        android:id="@+id/ThreadPool"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="从网页获取数据" />
+
+    <EditText
+        android:id="@+id/url"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="https://www.runoob.com/try/ajax/demo_test_post.php"/>
+
+    <TextView
+        android:id="@+id/getMsg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@null" />
+
+    <Button
+        android:id="@+id/getImage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="从网页获取图片" />
+
+    <EditText
+        android:id="@+id/url2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="https://ss0.baidu.com/73t1bjeh1BF3odCf/it/u=987797018,3673281858&amp;fm=85&amp;s=4ABEAF43379CFA3F06DDC5DE0300E0B1" />
+
+
+    <ImageView
+        android:id="@+id/downLoad"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content" />
+</LinearLayout>

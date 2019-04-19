@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="#FFF"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.kunrui.android_test.MyEditView.MyViewTest
+        android:id="@+id/customView"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:background="#FF000000"
+        app:colorValue="#915555"
+        app:textSize="20sp"
+        app:textString="This the Custom View !!!" />
+
+    <LinearLayout
+        android:id="@+id/line_layout"
+        android:orientation="horizontal"
+        android:layout_marginTop="50dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/webUrl"
+            android:layout_width="199dp"
+            android:layout_height="50dp"
+            android:singleLine="true"
+            android:text="https://blog.csdn.net/qq_24675479/article/details/81411996"
+            tools:ignore="LabelFor,TextFields" />
+        <Button
+            android:id="@+id/gone"
+            android:text="Gone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <WebView
+        android:id="@+id/customView_web"
+        android:layout_below="@+id/line_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    </WebView>
+</RelativeLayout>
