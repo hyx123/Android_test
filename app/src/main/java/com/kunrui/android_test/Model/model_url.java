@@ -23,7 +23,7 @@ import java.net.URL;
 
 import javax.net.ssl.HttpsURLConnection;
 
-public class model_url implements Model {
+public class  model_url implements Model {
     @Override
     public String httpGet(String Path) throws Exception{
         System.out.println("Path:" + Path);

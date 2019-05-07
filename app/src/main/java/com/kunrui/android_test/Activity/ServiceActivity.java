@@ -53,7 +53,7 @@ public class ServiceActivity extends Activity {
                     bindService(bindService, mybind.connection, BIND_AUTO_CREATE);
                     break;
                 case R.id.unbindService:
-//                    mybind.mybind.getString();
+                    mybind.mybind.getString();
                     unbindService(mybind.connection);
                     break;
             }

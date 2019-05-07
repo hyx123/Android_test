@@ -284,13 +284,15 @@ public class QRScannerActivity extends AppCompatActivity implements SurfaceHolde
 //            Log.e("url", img_url);
             ContentResolver cr = this.getContentResolver();
             try {
-                Bitmap bitmap = BitmapFactory.decodeStream(cr.openInputStream(uri));
-                String path = FileUtils.getRealPathFromUri(QRScannerActivity.this, uri);
+                Bitmap bitmap = BitmapFactory.decodeStream(cr.openInputStream(uri)); //图片太大zxing会不能识别,
+                //https://blog.csdn.net/lin20044140410/article/details/76584285 5种压缩方式
+                String path = FileUtils.getRealPathFromUri(QRScannerActivity.this, uri); //根据URI获取图片绝对路径
                 if(path != null) {
                     Log.e("uri path:", path);
                 } else
                     Log.e("Not found", "path,,");
 
+                //大图片是需要压缩的
                 @SuppressLint("SdCardPath") String result = QRHelper.getReult(BitmapFactory.decodeFile(path));
                 if(result != null) {
                     Toast.makeText(getApplicationContext(), result, Toast.LENGTH_SHORT).show();

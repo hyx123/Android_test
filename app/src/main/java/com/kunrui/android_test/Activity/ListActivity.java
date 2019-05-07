@@ -1,6 +1,7 @@
 /* Created by hyx
  * In 2019.3.26
  * Touch on ListView
+ * https://www.2cto.com/kf/201804/738696.html NDK导入
  */
 
 package com.kunrui.android_test.Activity;
@@ -74,6 +75,14 @@ public class ListActivity extends AppCompatActivity{
                         intent = new Intent(ListActivity.this, QRScannerActivity.class);
                         startActivity(intent);
                         break;
+                    case "C++ NDK":
+                        intent = new Intent(ListActivity.this, NdkCPlusPlus.class);
+                        startActivity(intent);
+                        break;
+                    case "侧滑Menu":
+                        intent = new Intent(ListActivity.this, SimpleSwipeMenu.class);
+                        startActivity(intent);
+                        break;
                     default:
                         break;
                 }
@@ -90,5 +99,7 @@ public class ListActivity extends AppCompatActivity{
         fruitList.add(new Fruit("lte", R.drawable.ic_action_globe));
         fruitList.add(new Fruit("CustomView", R.drawable.ic_action_globe));
         fruitList.add(new Fruit("QRCode", R.drawable.ic_action_globe));
+        fruitList.add(new Fruit("C++ NDK", R.drawable.ic_action_globe));
+        fruitList.add(new Fruit("侧滑Menu", R.drawable.ic_action_globe));
     }
 }

@@ -37,6 +37,12 @@
         </activity>
 
         <activity
+            android:name=".Activity.SimpleSwipeMenu"
+            android:launchMode="standard"
+            >
+        </activity>
+
+        <activity
             android:name=".Activity.RecyclerActivity"
             android:launchMode="standard"
             >
@@ -62,6 +68,12 @@
 
         <activity
             android:name=".qrdemo.QRScannerActivity"
+            android:launchMode="standard"
+            >
+        </activity>
+
+        <activity
+            android:name=".Activity.NdkCPlusPlus"
             android:launchMode="standard"
             >
         </activity>
