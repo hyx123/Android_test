@@ -51,8 +51,12 @@ public class ListActivity extends AppCompatActivity{
 
                 Intent intent;
                 switch (String.valueOf(view_text.getText())) {
-                    case "Service":
+                    case "Service Fragment":
                         intent = new Intent(ListActivity.this, ServiceActivity.class);
+                        startActivity(intent);
+                        break;
+                    case "Service Back DownLoad":
+                        intent = new Intent(ListActivity.this, ServiceBakDlActivity.class);
                         startActivity(intent);
                         break;
                     case "RecyclerView":
@@ -92,7 +96,8 @@ public class ListActivity extends AppCompatActivity{
     }
 
     private void initFruits() {
-        fruitList.add(new Fruit("Service", R.drawable.ic_action_globe));
+        fruitList.add(new Fruit("Service Fragment", R.drawable.ic_action_globe));
+        fruitList.add(new Fruit("Service Back DownLoad", R.drawable.ic_action_globe));
         fruitList.add(new Fruit("Content Provider", R.drawable.ic_action_globe));
         fruitList.add(new Fruit("RecyclerView", R.drawable.ic_action_globe));
         fruitList.add(new Fruit("Executors", R.drawable.ic_action_globe));

@@ -179,9 +179,7 @@ public class QRScannerActivity extends AppCompatActivity implements SurfaceHolde
     private void initCamera(SurfaceHolder surfaceHolder) {
         try {
             CameraManager.get().openDriver(surfaceHolder);
-        } catch (IOException ioe) {
-            return;
-        } catch (RuntimeException e) {
+        } catch (IOException | RuntimeException ioe) {
             return;
         }
         if (handler == null) {

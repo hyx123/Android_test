@@ -33,4 +33,5 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     implementation 'com.zhy:okhttputils:2.6.2'
     implementation 'com.github.anzaizai:EasySwipeMenuLayout:1.1.2'
+    implementation 'com.squareup.okhttp3:okhttp:3.7.0'
 }
