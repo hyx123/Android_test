@@ -73,7 +73,7 @@ public class DownloadTask extends AsyncTask<String,Integer,Integer> {
                         savedFile.write(b,0,len);
                         //计算已下载的百分比
                         int progress = (int)((total+downloadedLength)*100/contentLength);
-                        publishProgress(progress);
+                        publishProgress(progress); //onProgressUpdate触发因素
                     }
                 }
                 response.body().close();
@@ -101,6 +101,7 @@ public class DownloadTask extends AsyncTask<String,Integer,Integer> {
         return TYPE_FAILED;
     }
 
+    //更新任务进度触发
     @Override
     protected void onProgressUpdate(Integer... values) {
         int progress = values[0];

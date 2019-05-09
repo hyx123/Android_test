@@ -11,6 +11,7 @@ import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.ComponentName;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.ServiceConnection;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
@@ -37,6 +38,7 @@ public class ServiceBakDlActivity extends AppCompatActivity implements View.OnCl
         public void onServiceConnected(ComponentName name, IBinder service) {
             Log.e("onServiceConnected", "YES");
             downloadBinder = (DownloadService.DownloadBinder) service;
+            registBroadCast();
         }
 
         @Override
@@ -63,21 +65,28 @@ public class ServiceBakDlActivity extends AppCompatActivity implements View.OnCl
             ActivityCompat.requestPermissions(ServiceBakDlActivity.this,new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},1);
         }
 
-        //8.0崩溃问题
-        String CHANNEL_ONE_ID = "download";
-        String CHANNEL_ONE_NAME = "Channel One";
-        NotificationChannel notificationChannel = null;
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
-            notificationChannel = new NotificationChannel(CHANNEL_ONE_ID,
-                    CHANNEL_ONE_NAME, NotificationManager.IMPORTANCE_HIGH);
-            notificationChannel.enableLights(true);
-            notificationChannel.setLightColor(Color.RED);
-            notificationChannel.setShowBadge(true);
-            notificationChannel.setLockscreenVisibility(Notification.VISIBILITY_PUBLIC);
-            NotificationManager manager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-            assert manager != null;
-            manager.createNotificationChannel(notificationChannel);
-        }
+//        //8.0崩溃问题
+//        String CHANNEL_ONE_ID = "download";
+//        String CHANNEL_ONE_NAME = "Channel One";
+//        NotificationChannel notificationChannel = null;
+//        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+//            notificationChannel = new NotificationChannel(CHANNEL_ONE_ID,
+//                    CHANNEL_ONE_NAME, NotificationManager.IMPORTANCE_HIGH);
+//            notificationChannel.enableLights(true);
+//            notificationChannel.setLightColor(Color.RED);
+//            notificationChannel.setShowBadge(true);
+//            notificationChannel.setLockscreenVisibility(Notification.VISIBILITY_PUBLIC);
+//            NotificationManager manager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+//            assert manager != null;
+//            manager.createNotificationChannel(notificationChannel);
+//        }
+    }
+
+    //动态广播注册
+    public void registBroadCast() {
+//        IntentFilter filter = new IntentFilter();
+//        filter.addAction("actRegister");
+//        registerReceiver(downloadBinder.acationReceiver, filter);
     }
 
     @Override
@@ -119,6 +128,8 @@ public class ServiceBakDlActivity extends AppCompatActivity implements View.OnCl
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        unbindService(connection);
+//        放到ListActivity中调用了
+//        unbindService(connection);
+//        unregisterReceiver(downloadBinder.acationReceiver);
     }
 }

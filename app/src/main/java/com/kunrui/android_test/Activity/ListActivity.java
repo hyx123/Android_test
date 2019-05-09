@@ -7,8 +7,12 @@
 package com.kunrui.android_test.Activity;
 
 import android.Manifest;
+import android.content.ComponentName;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.content.ServiceConnection;
 import android.os.Bundle;
+import android.os.IBinder;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -21,6 +25,7 @@ import com.kunrui.android_test.ListView.Fruit;
 import com.kunrui.android_test.ListView.FruitAdapter;
 import com.kunrui.android_test.Presenter.PersenterURL;
 import com.kunrui.android_test.R;
+import com.kunrui.android_test.Service.DownloadService;
 import com.kunrui.android_test.qrdemo.QRScannerActivity;
 
 import java.util.ArrayList;
@@ -87,12 +92,18 @@ public class ListActivity extends AppCompatActivity{
                         intent = new Intent(ListActivity.this, SimpleSwipeMenu.class);
                         startActivity(intent);
                         break;
+                    case "BroadCast":
+                        intent = new Intent(ListActivity.this, BroadCast.class);
+                        startActivity(intent);
+                        break;
                     default:
                         break;
                 }
-
             }
         });
+        Intent intent = new Intent(ListActivity.this, DownloadService.class);
+        startService(intent);//启动服务
+        bindService(intent,connection,BIND_AUTO_CREATE);//绑定服务
     }
 
     private void initFruits() {
@@ -106,5 +117,36 @@ public class ListActivity extends AppCompatActivity{
         fruitList.add(new Fruit("QRCode", R.drawable.ic_action_globe));
         fruitList.add(new Fruit("C++ NDK", R.drawable.ic_action_globe));
         fruitList.add(new Fruit("侧滑Menu", R.drawable.ic_action_globe));
+        fruitList.add(new Fruit("BroadCast", R.drawable.ic_action_globe));
+    }
+
+    private DownloadService.DownloadBinder downloadBinder;
+
+    private ServiceConnection connection = new ServiceConnection() {
+        @Override
+        public void onServiceConnected(ComponentName name, IBinder service) {
+            Log.e("onServiceConnected", "YES");
+            downloadBinder = (DownloadService.DownloadBinder) service;
+            registBroadCast();
+        }
+
+        @Override
+        public void onServiceDisconnected(ComponentName name) {
+
+        }
+    };
+
+    //动态广播注册
+    public void registBroadCast() {
+        IntentFilter filter = new IntentFilter();
+        filter.addAction("actRegister");
+        registerReceiver(downloadBinder.acationReceiver, filter);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unbindService(connection);
+        unregisterReceiver(downloadBinder.acationReceiver);
     }
 }

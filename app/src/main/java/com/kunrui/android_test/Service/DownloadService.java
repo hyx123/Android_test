@@ -4,26 +4,28 @@ import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.os.Binder;
-import android.os.Build;
 import android.os.Environment;
 import android.os.IBinder;
-import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.kunrui.android_test.Activity.ServiceBakDlActivity;
 import com.kunrui.android_test.Interface.DownloadListener;
 import com.kunrui.android_test.Interface.DownloadTask;
 import com.kunrui.android_test.R;
 
 import java.io.File;
+import java.util.Arrays;
+
 
 public class DownloadService extends Service {
     private DownloadTask downloadTask;
     private String downloadUrl;
+    private int no = 0;
 
     private DownloadListener listener = new DownloadListener() {
         @Override
@@ -88,15 +90,28 @@ public class DownloadService extends Service {
 
     private Notification getNotification(String title, int progress){
         Log.e("getNotification", "transfer");
-        Intent intent = new Intent(this,ServiceBakDlActivity.class);
-        PendingIntent pi = PendingIntent.getActivity(this,0,intent,0);
-//        NotificationCompat.Builder builder = new NotificationCompat.Builder(this);
+
+        Intent intent =new Intent();
+        intent.setAction("actRegister");
+        PendingIntent pi = PendingIntent.getBroadcast(this, 0, intent, 0);  //用于操作通知栏进度条的点击事件
+        Log.e("PendingIntent", "OK");
+
+//        Intent intent = new Intent();
+//        intent.setAction("MLY");
+//        intent.putExtra("info", "hyx");
+//        PendingIntent pi = PendingIntent.getBroadcast(this, 0, intent, FLAG_UPDATE_CURRENT);
+//        context.sendBroadcast(intent);
+
+        //也可以是getIntent, broadcast
+//        Intent intent = new Intent(this, ListActivity.class);
+//        PendingIntent pi = PendingIntent.getActivity(this,0,intent,FLAG_UPDATE_CURRENT); //requestCode是用于刷新参数的
+        //NotificationCompat.Builder builder = new NotificationCompat.Builder(this);
         Notification.Builder builder = new Notification.Builder(this);
         builder.setSmallIcon(R.mipmap.ic_launcher);
         builder.setLargeIcon(BitmapFactory.decodeResource(getResources(),R.mipmap.ic_launcher));
-        builder.setContentIntent(pi);
+        builder.setContentIntent(pi);   //点击事件
         builder.setContentTitle(title);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
             builder.setChannelId("download");
         }
 //        builder.setTicker("Nature");
@@ -108,9 +123,12 @@ public class DownloadService extends Service {
         return builder.build();
     }
 
+    //事件调用
     public class DownloadBinder extends Binder {
+        public AcationReceiver acationReceiver = new AcationReceiver();
 
         public void startDownload(String url){
+            no = 0;
             Log.e("startDownload", "OK");
             if(downloadTask == null){
                 Log.e("downloadTask", "null");
@@ -119,16 +137,19 @@ public class DownloadService extends Service {
             downloadUrl =url;
             downloadTask = new DownloadTask(listener);
             downloadTask.execute(downloadUrl);
-            startForeground(1,getNotification("Downloading...",0));
+            startForeground(1,getNotification("Downloading...",0));     //下载进度条显示
+
             Toast.makeText(DownloadService.this,"Download ...",Toast.LENGTH_SHORT).show();
         }
         public void pauseDownload(){
+            no = 1;
             if(downloadTask != null){
                 downloadTask.pauseDownload();
             }
         }
 
         public void cancelDownload(){
+            no = 1;
             if (downloadTask !=null){
                 downloadTask.cancelDownload();
             }
@@ -143,6 +164,23 @@ public class DownloadService extends Service {
                 getNotificationManager().cancel(1);
                 stopForeground(true);
                 Toast.makeText(DownloadService.this,"Canceled",Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+    //动态广播, 用来接收暂停信息
+    public class AcationReceiver extends BroadcastReceiver {
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String action = intent.getAction();
+            assert action != null;
+            if(action.equals("actRegister")) {
+                Log.e("AcationReceiver", "success");
+                if (no == 0)
+                    mBinder.pauseDownload();
+                else if (no == 1)
+                    mBinder.startDownload(downloadUrl);
             }
         }
     }
