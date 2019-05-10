@@ -1,5 +1,6 @@
 package com.kunrui.android_test.Activity;
 
+import android.content.ComponentName;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -26,6 +27,7 @@ public class BroadCast extends AppCompatActivity {
         Intent intent = new Intent();
         intent.setAction("MLY");
         intent.putExtra("info", "hyx");
+        intent.setComponent(new ComponentName(this, "com.kunrui.android_test.BroadCast.NewReciver"));
         sendBroadcast(intent);
     }
 }
