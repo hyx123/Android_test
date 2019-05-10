@@ -83,10 +83,12 @@
             android:enabled="true"
             android:exported="true">
             <intent-filter>
-                <!--自定义Action-->
+
+                <!-- 自定义Action -->
                 <action android:name="MLY" />
             </intent-filter>
         </receiver>
+
     </application>
 
 </manifest>

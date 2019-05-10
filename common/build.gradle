@@ -1,24 +1,24 @@
-apply plugin: 'com.android.application'
+apply plugin: 'com.android.library'
 
 android {
     compileSdkVersion 28
+
+
+
     defaultConfig {
-        applicationId "com.kunrui.android_test"
         minSdkVersion 19
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
+
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
     }
+
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-        }
-    }
-    externalNativeBuild {
-        cmake {
-            path 'CMakeLists.txt'
         }
     }
 
@@ -37,5 +37,4 @@ dependencies {
     implementation 'com.zhy:okhttputils:2.6.2'
     implementation 'com.github.anzaizai:EasySwipeMenuLayout:1.1.2'
     implementation 'com.squareup.okhttp3:okhttp:3.7.0'
-    implementation project(':common')
 }
