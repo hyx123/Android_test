@@ -3,6 +3,7 @@ package com.kunrui.android_test.Activity;
  * In 2019.5.8
  * https://blog.csdn.net/ipinki1218/article/details/81563021    创建
  * https://blog.csdn.net/qq_15527709/article/details/78853048   8.0适配
+ * https://www.cnblogs.com/huangjialin/p/7738104.html   AIDL两个应用之间通信， 可以用于支付， 原来的IBindler替换成MYAIDL
  */
 
 import android.Manifest;

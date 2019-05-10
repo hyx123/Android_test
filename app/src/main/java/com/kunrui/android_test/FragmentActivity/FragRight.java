@@ -8,10 +8,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.kunrui.android_test.LiveDataBus.LiveDataBus;
 import com.kunrui.android_test.R;
 
-public class FragRight extends Fragment {
+import java.util.Objects;
 
+public class FragRight extends Fragment {
+    private int id = 0;
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -22,7 +25,14 @@ public class FragRight extends Fragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-//        explain = getActivity().getString(R.string.explain);
+        Objects.requireNonNull(getActivity()).findViewById(R.id.side_right).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                id++;
+                LiveDataBus.get().with("key_name").setValue(String.valueOf(id));   //主线程发送消息
+                LiveDataBus.get().with("sticky_key").postValue(String.valueOf(id));   //后台线程发送消息(也可以在主线程中发送), 订阅者会在主线程收到消息
+//                LiveDataBus.get().with("key_name").postValue(value);  后台线程
+            }
+        });
     }
-
 }

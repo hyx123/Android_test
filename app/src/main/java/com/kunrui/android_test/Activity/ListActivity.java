@@ -88,7 +88,7 @@ public class ListActivity extends AppCompatActivity{
                         intent = new Intent(ListActivity.this, NdkCPlusPlus.class);
                         startActivity(intent);
                         break;
-                    case "侧滑Menu":
+                    case "侧滑Menu handlerThread":
                         intent = new Intent(ListActivity.this, SimpleSwipeMenu.class);
                         startActivity(intent);
                         break;
@@ -116,7 +116,7 @@ public class ListActivity extends AppCompatActivity{
         fruitList.add(new Fruit("CustomView", R.drawable.ic_action_globe));
         fruitList.add(new Fruit("QRCode", R.drawable.ic_action_globe));
         fruitList.add(new Fruit("C++ NDK", R.drawable.ic_action_globe));
-        fruitList.add(new Fruit("侧滑Menu", R.drawable.ic_action_globe));
+        fruitList.add(new Fruit("侧滑Menu handlerThread", R.drawable.ic_action_globe));
         fruitList.add(new Fruit("BroadCast", R.drawable.ic_action_globe));
     }
 
