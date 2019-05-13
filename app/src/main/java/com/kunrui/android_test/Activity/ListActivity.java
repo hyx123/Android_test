@@ -16,30 +16,42 @@ import android.os.IBinder;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.FrameLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.kunrui.android_test.Interface.EventUtil;
 import com.kunrui.android_test.ListView.Fruit;
 import com.kunrui.android_test.ListView.FruitAdapter;
 import com.kunrui.android_test.Presenter.PersenterURL;
 import com.kunrui.android_test.R;
 import com.kunrui.android_test.Service.DownloadService;
 import com.kunrui.android_test.qrdemo.QRScannerActivity;
+import com.kunrui.common.EventUtil;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import io.flutter.facade.Flutter;
+import io.flutter.view.FlutterView;
+
 public class ListActivity extends AppCompatActivity{
     private List<Fruit> fruitList = new ArrayList<>();
     private PersenterURL persenterURL = new PersenterURL();
+    private FlutterView flutterView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.list_activity);
+
+        flutterView = Flutter.createView(
+                ListActivity.this,
+                getLifecycle(),
+                "route"
+        );
 
         persenterURL.checkPermission(ListActivity.this, Manifest.permission.READ_EXTERNAL_STORAGE);
         initFruits();
@@ -53,7 +65,8 @@ public class ListActivity extends AppCompatActivity{
                 Log.d("position", String.valueOf(position));
 
                 TextView view_text = view.findViewById(R.id.fruit_name);
-                Toast.makeText(getApplicationContext(), view_text.getText(), Toast.LENGTH_SHORT).show();
+                if (!String.valueOf(view_text.getText()).equals("flutter component"))
+                    Toast.makeText(getApplicationContext(), view_text.getText(), Toast.LENGTH_SHORT).show();
 
                 Intent intent;
                 switch (String.valueOf(view_text.getText())) {
@@ -100,6 +113,16 @@ public class ListActivity extends AppCompatActivity{
                     case "home component":
                         EventUtil.open(ListActivity.this, "com.kunrui.home.MainActivity");
                         break;
+                    case "flutter component":
+                        FrameLayout.LayoutParams layout = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+//                        layout.leftMargin = 100;     位移
+
+//                        layout.topMargin = 200;
+//                        addContentView(flutterView, layout);  同一个布局添加
+                        setContentView(flutterView, layout);
+//                        intent = new Intent(ListActivity.this, layout.getClass());
+//                        startActivity(intent);
+                        break;
                     default:
                         break;
                 }
@@ -123,6 +146,7 @@ public class ListActivity extends AppCompatActivity{
         fruitList.add(new Fruit("侧滑Menu handlerThread", R.drawable.ic_action_globe));
         fruitList.add(new Fruit("BroadCast", R.drawable.ic_action_globe));
         fruitList.add(new Fruit("home component", R.drawable.ic_action_globe));
+        fruitList.add(new Fruit("flutter component", R.drawable.ic_action_globe));
     }
 
     private DownloadService.DownloadBinder downloadBinder;
@@ -153,5 +177,15 @@ public class ListActivity extends AppCompatActivity{
         super.onDestroy();
         unbindService(connection);
         unregisterReceiver(downloadBinder.acationReceiver);
+    }
+
+    @Override
+    public void onBackPressed() {
+        if(flutterView!=null){
+            flutterView.popRoute();
+            Log.e("flutterView", "popRoute");
+        }else {
+            super.onBackPressed();
+        }
     }
 }

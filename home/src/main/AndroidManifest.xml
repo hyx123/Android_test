@@ -3,7 +3,9 @@
     package="com.kunrui.home">
 
     <application>
-        <activity android:name=".MainActivity"></activity>
+        <activity
+            android:name=".MainActivity">
+        </activity>
     </application>
 
 </manifest>

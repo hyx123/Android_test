@@ -15,11 +15,25 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+        debug {
+            ndk {
+                abiFilters "armeabi-v7a"
+            }
+        }
+        release {
+            ndk {
+                abiFilters "armeabi-v7a"
+            }
+        }
     }
     externalNativeBuild {
         cmake {
             path 'CMakeLists.txt'
         }
+    }
+    compileOptions {
+        sourceCompatibility 1.8
+        targetCompatibility 1.8
     }
 
 }
@@ -37,9 +51,9 @@ dependencies {
     implementation 'com.zhy:okhttputils:2.6.2'
     implementation 'com.github.anzaizai:EasySwipeMenuLayout:1.1.2'
     implementation 'com.squareup.okhttp3:okhttp:3.7.0'
-    implementation project(':common')
+    implementation project(path: ':common')
     if (!isDebug.toBoolean()) {
         implementation project(':home')
-//        implementation project('home')
     }
+    implementation project(path: ':my_flutter')
 }
