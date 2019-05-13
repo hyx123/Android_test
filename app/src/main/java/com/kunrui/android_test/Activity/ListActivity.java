@@ -21,6 +21,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.kunrui.android_test.Interface.EventUtil;
 import com.kunrui.android_test.ListView.Fruit;
 import com.kunrui.android_test.ListView.FruitAdapter;
 import com.kunrui.android_test.Presenter.PersenterURL;
@@ -96,6 +97,9 @@ public class ListActivity extends AppCompatActivity{
                         intent = new Intent(ListActivity.this, BroadCast.class);
                         startActivity(intent);
                         break;
+                    case "home component":
+                        EventUtil.open(ListActivity.this, "com.kunrui.home.MainActivity");
+                        break;
                     default:
                         break;
                 }
@@ -118,6 +122,7 @@ public class ListActivity extends AppCompatActivity{
         fruitList.add(new Fruit("C++ NDK", R.drawable.ic_action_globe));
         fruitList.add(new Fruit("侧滑Menu handlerThread", R.drawable.ic_action_globe));
         fruitList.add(new Fruit("BroadCast", R.drawable.ic_action_globe));
+        fruitList.add(new Fruit("home component", R.drawable.ic_action_globe));
     }
 
     private DownloadService.DownloadBinder downloadBinder;

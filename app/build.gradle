@@ -38,4 +38,8 @@ dependencies {
     implementation 'com.github.anzaizai:EasySwipeMenuLayout:1.1.2'
     implementation 'com.squareup.okhttp3:okhttp:3.7.0'
     implementation project(':common')
+    if (!isDebug.toBoolean()) {
+        implementation project(':home')
+//        implementation project('home')
+    }
 }
