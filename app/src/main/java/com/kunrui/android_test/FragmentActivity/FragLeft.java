@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.kunrui.android_test.LiveDataBus.LiveDataBus;
 import com.kunrui.android_test.R;
@@ -20,12 +21,15 @@ import com.kunrui.android_test.R;
 import java.util.Objects;
 
 public class FragLeft extends Fragment {
+    private TextView textView;
+    private String sText = "";
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         assert getArguments() != null;
-//        Log.e("Create Left Key", getArguments().getString("Key"));
+
+        Log.e("Create Left Key", getArguments().getString("Key"));
         //创建订阅者
         LiveDataBus.get()
                 .with("key_name", String.class)
@@ -43,6 +47,7 @@ public class FragLeft extends Fragment {
                     @Override
                     public void onChanged(@Nullable String s) {
                         Log.e("observeSticky ", s);
+                        sText = s;
                     }
                 });
         //observeForever 需要手动取消订阅
@@ -68,10 +73,13 @@ public class FragLeft extends Fragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-//        Log.e("Activity Left", "Created");
+        Log.e("Activity Left", "Created");
+        textView = getActivity().findViewById(R.id.side_left);
+//        textView.setText(sText);
         Objects.requireNonNull(getActivity()).findViewById(R.id.side_left).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                textView.setText(sText);
             }
         });
 //        explain = getActivity().getString(R.string.explain);
@@ -82,6 +90,7 @@ public class FragLeft extends Fragment {
         super.onHiddenChanged(hidden);
         if (!hidden) {
 //            Log.e("Hidden Change:", "Changed");
+            textView.setText(sText);
         }
     }
 }

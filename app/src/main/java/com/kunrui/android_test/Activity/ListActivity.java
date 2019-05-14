@@ -117,8 +117,8 @@ public class ListActivity extends AppCompatActivity{
                         FrameLayout.LayoutParams layout = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
 //                        layout.leftMargin = 100;     位移
 
-//                        layout.topMargin = 200;
-//                        addContentView(flutterView, layout);  同一个布局添加
+                        layout.topMargin = 200;
+//                        addContentView(flutterView, layout);  //同一个布局添加
                         setContentView(flutterView, layout);
 //                        intent = new Intent(ListActivity.this, layout.getClass());
 //                        startActivity(intent);
