@@ -1,6 +1,7 @@
 package com.kunrui.android_test.Service;
 
 import android.app.Notification;
+import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
@@ -25,6 +26,7 @@ import java.util.Arrays;
 public class DownloadService extends Service {
     private DownloadTask downloadTask;
     private String downloadUrl;
+    private String CHANNEL_ONE_ID = "download";
     private int no = 0;
 
     private DownloadListener listener = new DownloadListener() {
@@ -85,7 +87,7 @@ public class DownloadService extends Service {
     }
 
     private NotificationManager getNotificationManager(){
-        return (NotificationManager)getSystemService(NOTIFICATION_SERVICE);
+        return (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
     }
 
     private Notification getNotification(String title, int progress){
@@ -112,8 +114,10 @@ public class DownloadService extends Service {
         builder.setContentIntent(pi);   //点击事件
         builder.setContentTitle(title);
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
-            builder.setChannelId("download");
-        }
+            Log.e("setChannelId", "YES");
+            builder.setChannelId(CHANNEL_ONE_ID);
+        } else
+            Log.e("setChannelId", "NO");
 //        builder.setTicker("Nature");
         if (progress>=0){
             //当progress大于或者等于0时才需显示下载进度
@@ -164,6 +168,14 @@ public class DownloadService extends Service {
                 getNotificationManager().cancel(1);
                 stopForeground(true);
                 Toast.makeText(DownloadService.this,"Canceled",Toast.LENGTH_SHORT).show();
+            }
+        }
+
+        public void setChannelID() {
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                String CHANNEL_ONE_NAME = "Channel One";
+                NotificationChannel notificationChannel = new NotificationChannel(CHANNEL_ONE_ID, CHANNEL_ONE_NAME, NotificationManager.IMPORTANCE_HIGH);
+                getNotificationManager().createNotificationChannel(notificationChannel);
             }
         }
     }

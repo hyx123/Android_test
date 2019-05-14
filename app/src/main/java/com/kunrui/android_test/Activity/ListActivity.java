@@ -58,74 +58,70 @@ public class ListActivity extends AppCompatActivity{
         FruitAdapter adapter = new FruitAdapter(ListActivity.this, R.layout.fruit_item, fruitList);
         final ListView listView = findViewById(R.id.list_view);
         listView.setAdapter(adapter);
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                System.out.println("position:" + position);
-                Log.d("position", String.valueOf(position));
+        listView.setOnItemClickListener((parent, view, position, id) -> {
+            System.out.println("position:" + position);
+            Log.d("position", String.valueOf(position));
 
-                TextView view_text = view.findViewById(R.id.fruit_name);
-                if (!String.valueOf(view_text.getText()).equals("flutter component"))
-                    Toast.makeText(getApplicationContext(), view_text.getText(), Toast.LENGTH_SHORT).show();
+            TextView view_text = view.findViewById(R.id.fruit_name);
+            if (!String.valueOf(view_text.getText()).equals("flutter component"))
+                Toast.makeText(getApplicationContext(), view_text.getText(), Toast.LENGTH_SHORT).show();
 
-                Intent intent;
-                switch (String.valueOf(view_text.getText())) {
-                    case "Service Fragment":
-                        intent = new Intent(ListActivity.this, ServiceActivity.class);
-                        startActivity(intent);
-                        break;
-                    case "Service Back DownLoad":
-                        intent = new Intent(ListActivity.this, ServiceBakDlActivity.class);
-                        startActivity(intent);
-                        break;
-                    case "RecyclerView":
-                        intent = new Intent(ListActivity.this, RecyclerActivity.class);
-                        startActivity(intent);
-                        break;
-                    case "Executors":
-                        intent = new Intent(ListActivity.this, ExecutorsHttps.class);
-                        startActivity(intent);
-                        break;
-                    case "lte":
-                        intent = new Intent(ListActivity.this, LteMsg.class);
-                        startActivity(intent);
-                        break;
-                    case "CustomView":
-                        intent = new Intent(ListActivity.this, CustomView.class);
-                        startActivity(intent);
-                        break;
-                    case "QRCode":
-                        intent = new Intent(ListActivity.this, QRScannerActivity.class);
-                        startActivity(intent);
-                        break;
-                    case "C++ NDK":
-                        intent = new Intent(ListActivity.this, NdkCPlusPlus.class);
-                        startActivity(intent);
-                        break;
-                    case "侧滑Menu handlerThread":
-                        intent = new Intent(ListActivity.this, SimpleSwipeMenu.class);
-                        startActivity(intent);
-                        break;
-                    case "BroadCast":
-                        intent = new Intent(ListActivity.this, BroadCast.class);
-                        startActivity(intent);
-                        break;
-                    case "home component":
-                        EventUtil.open(ListActivity.this, "com.kunrui.home.MainActivity");
-                        break;
-                    case "flutter component":
-                        FrameLayout.LayoutParams layout = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
-//                        layout.leftMargin = 100;     位移
-
-                        layout.topMargin = 200;
-//                        addContentView(flutterView, layout);  //同一个布局添加
-                        setContentView(flutterView, layout);
-//                        intent = new Intent(ListActivity.this, layout.getClass());
-//                        startActivity(intent);
-                        break;
-                    default:
-                        break;
-                }
+            Intent intent;
+            switch (String.valueOf(view_text.getText())) {
+                case "Service Fragment":
+                    intent = new Intent(ListActivity.this, ServiceActivity.class);
+                    startActivity(intent);
+                    break;
+                case "Service Back DownLoad":
+                    intent = new Intent(ListActivity.this, ServiceBakDlActivity.class);
+                    startActivity(intent);
+                    break;
+                case "RecyclerView":
+                    intent = new Intent(ListActivity.this, RecyclerActivity.class);
+                    startActivity(intent);
+                    break;
+                case "Executors":
+                    intent = new Intent(ListActivity.this, ExecutorsHttps.class);
+                    startActivity(intent);
+                    break;
+                case "lte":
+                    intent = new Intent(ListActivity.this, LteMsg.class);
+                    startActivity(intent);
+                    break;
+                case "CustomView":
+                    intent = new Intent(ListActivity.this, CustomView.class);
+                    startActivity(intent);
+                    break;
+                case "QRCode":
+                    intent = new Intent(ListActivity.this, QRScannerActivity.class);
+                    startActivity(intent);
+                    break;
+                case "C++ NDK":
+                    intent = new Intent(ListActivity.this, NdkCPlusPlus.class);
+                    startActivity(intent);
+                    break;
+                case "侧滑Menu handlerThread":
+                    intent = new Intent(ListActivity.this, SimpleSwipeMenu.class);
+                    startActivity(intent);
+                    break;
+                case "BroadCast":
+                    intent = new Intent(ListActivity.this, BroadCast.class);
+                    startActivity(intent);
+                    break;
+                case "home component":
+                    EventUtil.open(ListActivity.this, "com.kunrui.home.MainActivity");
+                    break;
+                case "flutter component":
+                    FrameLayout.LayoutParams layout = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+//                    layout.leftMargin = 100;     位移
+//                    layout.topMargin = 200;
+//                    addContentView(flutterView, layout);  //同一个布局添加
+                    setContentView(flutterView, layout);
+//                    intent = new Intent(ListActivity.this, layout.getClass());
+//                    startActivity(intent);
+                    break;
+                default:
+                    break;
             }
         });
         Intent intent = new Intent(ListActivity.this, DownloadService.class);

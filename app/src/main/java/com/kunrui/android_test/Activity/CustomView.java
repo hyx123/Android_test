@@ -30,11 +30,6 @@ public class CustomView extends AppCompatActivity {
         webView = persenterURL.initWebView(webView);
         webView.loadUrl(String.valueOf(editText.getText()));
 
-        findViewById(R.id.gone).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                webView.loadUrl(String.valueOf(editText.getText()));
-            }
-        });
+        findViewById(R.id.gone).setOnClickListener(v -> webView.loadUrl(String.valueOf(editText.getText())));
     }
 }

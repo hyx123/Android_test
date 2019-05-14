@@ -76,12 +76,7 @@ public class FragLeft extends Fragment {
         Log.e("Activity Left", "Created");
         textView = getActivity().findViewById(R.id.side_left);
 //        textView.setText(sText);
-        Objects.requireNonNull(getActivity()).findViewById(R.id.side_left).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                textView.setText(sText);
-            }
-        });
+        Objects.requireNonNull(getActivity()).findViewById(R.id.side_left).setOnClickListener(v -> textView.setText(sText));
 //        explain = getActivity().getString(R.string.explain);
     }
 
