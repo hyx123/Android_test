@@ -120,6 +120,9 @@ public class ListActivity extends AppCompatActivity{
 //                    intent = new Intent(ListActivity.this, layout.getClass());
 //                    startActivity(intent);
                     break;
+                case "Pop Menu":
+                    EventUtil.open(ListActivity.this, "com.kunrui.home.MenuPop");
+                    break;
                 default:
                     break;
             }
@@ -143,6 +146,7 @@ public class ListActivity extends AppCompatActivity{
         fruitList.add(new Fruit("BroadCast", R.drawable.ic_action_globe));
         fruitList.add(new Fruit("home component", R.drawable.ic_action_globe));
         fruitList.add(new Fruit("flutter component", R.drawable.ic_action_globe));
+        fruitList.add(new Fruit("Pop Menu", R.drawable.ic_action_globe));
     }
 
     private DownloadService.DownloadBinder downloadBinder;

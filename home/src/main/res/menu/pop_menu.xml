@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
+    <item
+        android:id="@+id/new_file"
+        android:icon="@drawable/ic_action_globe"
+        android:title="新建"/>
+
+    <item
+        android:id="@+id/open_file"
+        android:icon="@drawable/ic_action_globe"
+        android:title="打开"/>
+
+    <item
+        android:id="@+id/save_file"
+        android:icon="@drawable/ic_action_globe"
+        android:title="保存"/>
+
+    <item
+        android:id="@+id/rename_file"
+        android:icon="@drawable/ic_action_globe"
+        android:title="重命名"/>
+
+    <item
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        app:showAsAction="never"
+        android:title="编辑(E)">
+
+        <menu >
+            <item
+                android:id="@+id/v_file"
+                android:icon="@drawable/ic_action_globe"
+                android:title="粘贴"/>
+
+            <item
+                android:id="@+id/c_edit"
+                android:icon="@drawable/ic_action_globe"
+                android:title="复制"/>
+
+            <item
+                android:id="@+id/x_edit"
+                android:icon="@drawable/ic_action_globe"
+                android:title="剪切"/>
+
+            <item
+                android:id="@+id/rename_edit"
+                android:icon="@drawable/ic_action_globe"
+                android:title="重命名"/>
+        </menu>
+
+    </item>
+
+    <item
+        app:showAsAction="never"
+        android:id="@+id/hello"
+        android:icon="@drawable/ic_action_globe"
+        android:title="你好"/>
+
+    <item
+        app:showAsAction="never"
+        android:id="@+id/world"
+        android:icon="@drawable/ic_action_globe"
+        android:title="世界"/>
+</menu>

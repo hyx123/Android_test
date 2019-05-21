@@ -54,33 +54,30 @@ public class ExecutorsHttps extends AppCompatActivity {
 
         threadPoolExecutor = new ThreadPoolExecutor(3,5,5, TimeUnit.SECONDS, new LinkedBlockingQueue<Runnable>(100));
 
-        runnable = new Runnable() {
-            @Override
-            public void run() {
-                Message message = mhandler.obtainMessage();
-                Bundle bundle = new Bundle();
-                String Path;
-                try {
-                    switch (method) {
-                        case "ThreadPool":
-                            Path = String.valueOf(editText.getText());
-                            Log.d("ThreadPool", "run: ");
-                            bundle.putString("data", persenterURL.loadData(Path));
-                            message.what = 0;
-                            break;
-                        case "getImage":
-                            Path = String.valueOf(editText2.getText());
-                            Log.d("getImage", "run: ");
-                            bundle.putParcelable("img", persenterURL.loadImg(Path));
-                            message.what = 1;
-                            break;
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
+        runnable = () -> {
+            Message message = mhandler.obtainMessage();
+            Bundle bundle = new Bundle();
+            String Path;
+            try {
+                switch (method) {
+                    case "ThreadPool":
+                        Path = String.valueOf(editText.getText());
+                        Log.d("ThreadPool", "run: ");
+                        bundle.putString("data", persenterURL.loadData(Path));
+                        message.what = 0;
+                        break;
+                    case "getImage":
+                        Path = String.valueOf(editText2.getText());
+                        Log.d("getImage", "run: ");
+                        bundle.putParcelable("img", persenterURL.loadImg(Path));
+                        message.what = 1;
+                        break;
                 }
-                message.setData(bundle);
-                mhandler.sendMessage(message);
+            } catch (Exception e) {
+                e.printStackTrace();
             }
+            message.setData(bundle);
+            mhandler.sendMessage(message);
         };
 
         mhandler = new Handler(){

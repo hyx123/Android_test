@@ -13,12 +13,14 @@ import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.OrientationHelper;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
 import com.kunrui.android_test.R;
 import com.kunrui.android_test.Recycler.RecyclerAdapter;
+import com.kunrui.common.SoftKeyBoardListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,6 +41,20 @@ public class RecyclerActivity extends AppCompatActivity{
         editText = findViewById(R.id.addText);
         Button button = findViewById(R.id.addView);
         button.setOnClickListener(new myListen());
+
+        SoftKeyBoardListener.setListener(this, new SoftKeyBoardListener.OnSoftKeyBoardChangeListener() {
+            @Override
+            public void keyBoardShow(int height) {
+                Log.e("显示", "1");
+                recyclerAdapter.update(list);
+            }
+
+            @Override
+            public void keyBoardHide(int height) {
+                Log.e("隐藏", "1");
+                recyclerAdapter.update(list);
+            }
+        });
     }
 
     public void setRecyclerView() {

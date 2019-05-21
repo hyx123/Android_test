@@ -45,31 +45,22 @@ public class ServiceActivity extends AppCompatActivity {
         bind.setOnClickListener(new myListen());
         unbind.setOnClickListener(new myListen());
 
-        findViewById(R.id.home).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Bundle bundle = new Bundle();
-                bundle.putString("Key", "Main");
-                changeTab(fragmentArrayList.get(0), bundle);
-            }
+        findViewById(R.id.home).setOnClickListener(v -> {
+            Bundle bundle = new Bundle();
+            bundle.putString("Key", "Main");
+            changeTab(fragmentArrayList.get(0), bundle);
         });
 
-        findViewById(R.id.left).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Bundle bundle = new Bundle();
-                bundle.putString("Key", "Main");
-                changeTab(fragmentArrayList.get(1), bundle);
-            }
+        findViewById(R.id.left).setOnClickListener(v -> {
+            Bundle bundle = new Bundle();
+            bundle.putString("Key", "Main");
+            changeTab(fragmentArrayList.get(1), bundle);
         });
 
-        findViewById(R.id.right).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Bundle bundle = new Bundle();
-                bundle.putString("Key", "Main");
-                changeTab(fragmentArrayList.get(2), bundle);
-            }
+        findViewById(R.id.right).setOnClickListener(v -> {
+            Bundle bundle = new Bundle();
+            bundle.putString("Key", "Main");
+            changeTab(fragmentArrayList.get(2), bundle);
         });
     }
 

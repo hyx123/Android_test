@@ -14,11 +14,11 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 public class DownloadTask extends AsyncTask<String,Integer,Integer> {
-    public static final int TYPE_SUCCESS = 0;
-    public static final int TYPE_FAILED = 1;
-    public static final int TYPE_PAUSED = 2;
-    public static final int TYPE_CANCELED = 3;
-    public static final int TYPE_ERROR = 4;
+    private static final int TYPE_SUCCESS = 0;
+    private static final int TYPE_FAILED = 1;
+    private static final int TYPE_PAUSED = 2;
+    private static final int TYPE_CANCELED = 3;
+    private static final int TYPE_ERROR = 4;
 
     private DownloadListener listener;
     private boolean isCanceled = false;
@@ -53,10 +53,15 @@ public class DownloadTask extends AsyncTask<String,Integer,Integer> {
             Request request = new Request.Builder()
                     //断点下载，指定从哪个字节开始下载
                     .addHeader("RANGE","bytes="+downloadedLength+"-")
+                    .get()//默认是
                     .url(downloadUrl)
                     .build();
+//            MediaType mediaType = MediaType.parse("text/x-markdown; charset=utf-8");  请求格式
+//            String requestBody = "I am Jdqm.";
+//                    .post(RequestBody.create(mediaType, requestBody))
             Response response = client.newCall(request).execute();
             if (response !=null){
+                //获取输入流
                 is = response.body().byteStream();
                 savedFile = new RandomAccessFile(file,"rw");
                 savedFile.seek(downloadedLength);//跳过已下载的字节

@@ -3,9 +3,14 @@
     package="com.kunrui.home">
 
     <application>
+        <activity android:name=".Menu_two"></activity>
         <activity
-            android:name=".MainActivity">
-        </activity>
+            android:name=".MenuPop"
+            android:theme="@style/mainStyle" />
+        <activity android:name=".MainActivity" />
+        <activity
+            android:name=".bottom"
+            android:label="@string/title_activity_bottom" />
     </application>
 
 </manifest>

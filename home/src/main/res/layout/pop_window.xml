@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:background="#585050"
+    android:orientation="vertical" >
+
+    <TextView
+        android:background="#fff"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:text="Hello"
+        android:drawableLeft="@drawable/ic_action_globe"
+        android:textSize="12sp" />
+    <TextView
+        android:layout_marginTop="1dip"
+        android:background="#fff"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:gravity="left"
+        android:text="world"
+        android:textSize="12sp" />
+    <TextView
+        android:layout_marginTop="1dip"
+        android:layout_width="match_parent"
+        android:background="#fff"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:gravity="left"
+        android:text="Welcome"
+        android:textSize="12sp" />
+    <TextView
+        android:layout_marginTop="1dip"
+        android:layout_width="match_parent"
+        android:background="#fff"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:gravity="left"
+        android:text="Come"
+        android:textSize="12sp" />
+    <TextView
+        android:layout_marginTop="1dip"
+        android:layout_width="match_parent"
+        android:background="#fff"
+        android:layout_height="0dp"
+        android:padding="10dp"
+        android:textSize="12sp" />
+</LinearLayout>
