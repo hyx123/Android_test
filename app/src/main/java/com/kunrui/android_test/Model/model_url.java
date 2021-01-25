@@ -80,7 +80,7 @@ public class  model_url implements Model {
     }
 
     private boolean checkPermissionGranted(Context context, String permission) {
-        return PermissionChecker.checkPermission(context, permission, android.os.Process.myPid(), android.os.Process.myUid(), context.getPackageName()) == PackageManager.PERMISSION_GRANTED;
+            return PermissionChecker.checkPermission(context, permission, android.os.Process.myPid(), android.os.Process.myUid(), context.getPackageName()) == PackageManager.PERMISSION_GRANTED;
     }
 
     @Override

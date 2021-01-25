@@ -5,12 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
-    <com.guanaj.easyswipemenulibrary.EasySwipeMenuLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:contentView="@+id/content"
-        app:leftMenuView="@+id/left"
-        app:rightMenuView="@+id/right">
+
         <LinearLayout
             android:id="@+id/left"
             android:layout_width="100dp"
@@ -55,7 +50,6 @@
                 android:padding="20dp"
                 android:text="收藏" />
         </LinearLayout>
-    </com.guanaj.easyswipemenulibrary.EasySwipeMenuLayout>
 
     <TextView
         android:id="@+id/text1"

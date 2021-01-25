@@ -15,12 +15,7 @@ public class BroadCast extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_broad_cast);
 
-        findViewById(R.id.button).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                send(v);
-            }
-        });
+        findViewById(R.id.button).setOnClickListener(this::send);
     }
 
     public void send(View v) {

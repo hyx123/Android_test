@@ -11,6 +11,7 @@ import android.content.ComponentName;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.ServiceConnection;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.support.v7.app.AppCompatActivity;
@@ -34,26 +35,19 @@ import com.kunrui.common.EventUtil;
 import java.util.ArrayList;
 import java.util.List;
 
-import io.flutter.facade.Flutter;
-import io.flutter.view.FlutterView;
 
 public class ListActivity extends AppCompatActivity{
     private List<Fruit> fruitList = new ArrayList<>();
     private PersenterURL persenterURL = new PersenterURL();
-    private FlutterView flutterView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.list_activity);
 
-        flutterView = Flutter.createView(
-                ListActivity.this,
-                getLifecycle(),
-                "route"
-        );
-
         persenterURL.checkPermission(ListActivity.this, Manifest.permission.READ_EXTERNAL_STORAGE);
+        persenterURL.checkPermission(ListActivity.this, Manifest.permission.CALL_PHONE);
+
         initFruits();
         FruitAdapter adapter = new FruitAdapter(ListActivity.this, R.layout.fruit_item, fruitList);
         final ListView listView = findViewById(R.id.list_view);
@@ -112,16 +106,16 @@ public class ListActivity extends AppCompatActivity{
                     EventUtil.open(ListActivity.this, "com.kunrui.home.MainActivity");
                     break;
                 case "flutter component":
-                    FrameLayout.LayoutParams layout = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
-//                    layout.leftMargin = 100;     位移
-//                    layout.topMargin = 200;
-//                    addContentView(flutterView, layout);  //同一个布局添加
-                    setContentView(flutterView, layout);
-//                    intent = new Intent(ListActivity.this, layout.getClass());
-//                    startActivity(intent);
                     break;
                 case "Pop Menu":
                     EventUtil.open(ListActivity.this, "com.kunrui.home.MenuPop");
+                    break;
+                case "Activity Intent":
+                    //https://www.cnblogs.com/cocoabird/p/8392274.html      其他应用activity跳转
+                    intent = new Intent("net.blogjava.mobile.MYACTION", Uri.parse("info://调用不了吗"));
+//                    intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:12345678"));  // 调用电话接口
+                    intent.putExtra("value", "hello intent");
+                    startActivity(intent);
                     break;
                 default:
                     break;
@@ -147,6 +141,7 @@ public class ListActivity extends AppCompatActivity{
         fruitList.add(new Fruit("home component", R.drawable.ic_action_globe));
         fruitList.add(new Fruit("flutter component", R.drawable.ic_action_globe));
         fruitList.add(new Fruit("Pop Menu", R.drawable.ic_action_globe));
+        fruitList.add(new Fruit("Activity Intent", R.drawable.ic_action_globe));
     }
 
     private DownloadService.DownloadBinder downloadBinder;
@@ -181,11 +176,6 @@ public class ListActivity extends AppCompatActivity{
 
     @Override
     public void onBackPressed() {
-        if(flutterView!=null){
-            flutterView.popRoute();
-            Log.e("flutterView", "popRoute");
-        }else {
-            super.onBackPressed();
-        }
+        super.onBackPressed();
     }
 }
